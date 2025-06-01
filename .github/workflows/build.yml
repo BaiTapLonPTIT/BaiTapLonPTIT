@@ -1,0 +1,26 @@
+name: Build C++ Project
+
+on:
+  push:
+    branches: ["**"]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Build project
+        run: |
+          cl /EHsc /Fe:wallet_system.exe *.cpp
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wallet_system
+          path: wallet_system.exe
