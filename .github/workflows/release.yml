@@ -1,0 +1,27 @@
+name: Build EXE and Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v3
+
+    - name: Set up MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Build project
+      run: |
+        cl /EHsc /Fe:wallet_system.exe *.cpp
+
+    - name: Upload EXE to release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: wallet_system.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
