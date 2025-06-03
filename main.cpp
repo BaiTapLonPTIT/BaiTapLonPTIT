@@ -1,32 +1,34 @@
 #include <iostream>
 
+using namespace std;
+
 int main() {
     while (true) {
-        std::cout << "============================\n";
-        std::cout << "CHUONG TRINH QUAN LY VI DIEN TU\n";
-        std::cout << "1. Dang nhap\n";
-        std::cout << "2. Dang ky\n";
-        std::cout << "3. Thoat\n";
-        std::cout << "Chon: ";
+        cout << "============================" << endl;
+        cout << "CHUONG TRINH QUAN LY VI DIEN TU" << endl;
+        cout << "1. Dang nhap" << endl;
+        cout << "2. Dang ky" << endl;
+        cout << "3. Thoat" << endl;
+        cout << "Chon: ";
 
         int choice;
-        std::cin >> choice;
+        cin >> choice;
 
         switch (choice) {
             case 1:
-                std::cout << "Dang nhap - chua ho tro\n";
+                cout << "Dang nhap - chua ho tro" << endl;
                 break;
             case 2:
-                std::cout << "Dang ky - chua ho tro\n";
+                cout << "Dang ky - chua ho tro" << endl;
                 break;
             case 3:
-                std::cout << "Tam biet!\n";
+                cout << "Tam biet!" << endl;
                 return 0;
             default:
-                std::cout << "Lua chon khong hop le!\n";
+                cout << "Lua chon khong hop le!" << endl;
         }
 
-        std::cout << "\n";
+        cout << endl;
     }
 }
 
