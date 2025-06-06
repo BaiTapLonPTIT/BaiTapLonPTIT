@@ -1,18 +1,26 @@
 #include "UserManager.h"
-#include <iostream>  // Dùng để nhập xuất
+#include <iostream>
+
+using namespace std;
 
 // Hàm thực hiện việc đăng ký người dùng mới
-void UserManager::registerUser() {
-    std::string username, password;
+UserAccount* UserManager::login() {
+    string username, password;
 
-    std::cout << "Nhap ten dang nhap: ";
-    std::cin >> username;  // Nhập tên người dùng từ bàn phím
+    cout << "Nhap ten dang nhap: ";
+    cin >> username;  // Nhập tên đăng nhập
 
-    std::cout << "Nhap mat khau: ";
-    std::cin >> password;  // Nhập mật khẩu từ bàn phím
+    cout << "Nhap mat khau: ";
+    cin >> password;  // Nhập mật khẩu
 
-    // Thêm người dùng mới vào danh sách
-    users.push_back(UserAccount(username, password));
+    // Duyệt qua danh sách người dùng để kiểm tra thông tin
+    for (auto& user : users) {
+        if (user.username == username && user.password == password) {
+            cout << "Dang nhap thanh cong!\n";
+            return &user;  // Trả về con trỏ đến tài khoản nếu đúng
+        }
+    }
 
-    std::cout << "Dang ky thanh cong!\n";
+    cout << "Dang nhap that bai!\n";
+    return nullptr;  // Trả về nullptr nếu đăng nhập thất bại
 }
