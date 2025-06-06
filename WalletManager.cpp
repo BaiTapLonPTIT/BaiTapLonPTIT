@@ -37,5 +37,5 @@ Wallet* WalletManager::findWalletByUser(const std::string& username) {
     for (auto& wallet : wallets) {
         if (wallet.ownerUsername == username) return &wallet;
     }
-    return nullptr; 
-} 
+    return nullptr;  
+}
