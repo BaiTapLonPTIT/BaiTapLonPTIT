@@ -4,10 +4,12 @@
 #include <vector>         // Dùng để lưu danh sách người dùng
 #include <string>
 
+using namespace std;
+
 // Lớp UserManager quản lý đăng ký và đăng nhập
 class UserManager {
 private:
-    std::vector<UserAccount> users;  // Danh sách các người dùng đã đăng ký
+    vector<UserAccount> users;  // Danh sách các người dùng đã đăng ký
 
 public:
     void registerUser();     // Hàm xử lý đăng ký
