@@ -11,7 +11,7 @@ bool TransactionManager::loadFromFile(const std::string& filename) {
             try {
                 transactions.push_back(Transaction::deserialize(line));
             } catch (...) {
-                // B? qua dòng l?i
+                // B? qua dï¿½ng l?i
             }
         }
     }

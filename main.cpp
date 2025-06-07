@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "Wallet.h"
+#include "WalletManager.h"
 #include <vector>
 #include <map>
 #include <string>
