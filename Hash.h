@@ -1,3 +1,6 @@
 #pragma once
 #include <string>
-std::string sha256(const std::string& str); 
+
+using namespace std;
+
+string sha256(const string& str);
