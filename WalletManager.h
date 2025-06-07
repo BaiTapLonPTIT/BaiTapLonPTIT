@@ -10,4 +10,4 @@ public:
     bool backup(const std::string& backupFile);
     Wallet* findWallet(const std::string& walletId);
     Wallet* findWalletByUser(const std::string& username);
-}; 
+}
