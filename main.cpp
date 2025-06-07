@@ -1,38 +1,22 @@
 #include <iostream>
+#include <fstream>
 #include "Wallet.h"
 #include <vector>
 #include <map>
+#include <string>
+#include <ctime>
+#include "WalletManager.h"
 
 using namespace std;
-
-class WalletManager {
-private:
-    map<string, Wallet> wallets;
-
-public:
-    void createWallet(const string& username) {
-        string walletId = "W" + to_string(wallets.size() + 1);
-        wallets[walletId] = Wallet(walletId, username, 0);
-        cout << "Tao vi thanh cong! ID vi: " << walletId << endl;
-    }
-
-    void showWalletInfo(const string& walletId) {
-        if (wallets.find(walletId) == wallets.end()) {
-            cout << "Khong tim thay vi!" << endl;
-            return;
-        }
-        cout << "Thong tin vi:" << endl;
-        cout << "ID vi: " << wallets[walletId].walletId << endl;
-        cout << "Chu so huu: " << wallets[walletId].ownerUsername << endl;
-        cout << "So du: " << wallets[walletId].balance << endl;
-    }
-};
 
 // Global variables
 WalletManager walletManager;
 string currentUser;
 
 int main() {
+    // Load existing wallets
+    walletManager.loadFromFile("data/wallets.dat");
+
     while (true) {
         cout << "============================" << endl;
         cout << "CHUONG TRINH QUAN LY VI DIEN TU" << endl;
@@ -65,7 +49,15 @@ int main() {
                 } else {
                     cout << "Nhap ID vi: ";
                     cin >> walletId;
-                    walletManager.showWalletInfo(walletId);
+                    Wallet* wallet = walletManager.findWallet(walletId);
+                    if (wallet) {
+                        cout << "Thong tin vi:" << endl;
+                        cout << "ID vi: " << wallet->walletId << endl;
+                        cout << "Chu so huu: " << wallet->ownerUsername << endl;
+                        cout << "So du: " << wallet->balance << endl;
+                    } else {
+                        cout << "Khong tim thay vi!" << endl;
+                    }
                 }
                 break;
             case 4:
