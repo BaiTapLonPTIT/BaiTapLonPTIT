@@ -89,6 +89,10 @@
 
 1. Mở PowerShell hoặc Command Prompt
 2. Di chuyển đến thư mục chứa mã nguồn
+3. Biên dịch chương trình bằng g++
+~g++ -o wallet_system.exe main.cpp WalletManager.cpp TransactionManager.cpp OTPManager.cpp UserManager.cpp Transaction.cpp Wallet.cpp UserAccount.cpp Hash.cpp utils.cpp
+4. Chạy chương trình
+~./wallet_system.exe
 
 ## Tính năng chính
 
