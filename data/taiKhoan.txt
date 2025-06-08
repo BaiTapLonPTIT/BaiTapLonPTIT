@@ -1,0 +1,2 @@
+admin: admin/admin
+user: nemo1/nemo1

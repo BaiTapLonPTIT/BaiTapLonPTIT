@@ -1,7 +1,6 @@
 *.exe
 *.dat
 *.log
-*.txt
 *.bin
 *.json
 *.xml
