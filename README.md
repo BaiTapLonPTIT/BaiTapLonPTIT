@@ -4,8 +4,30 @@
 
 ## Thành viên tham gia dự án và công việc được giao
 
+1. Dương Công Uy - Module 1: Quản lý Người dùng (User Management)
+   - Đăng ký tài khoản
+   - Đăng nhập
+   - Quản lý thông tin người dùng
+   - Mã hóa mật khẩu
 
+2. Nguyễn Thế Thanh Phương - Module 2: Quản lý Ví (Wallet Management)
+   - Tạo và quản lý ví điểm
+   - Xem số dư
+   - Cập nhật số dư
+   - Quản lý lịch sử ví
+   - Phân quyền của admin
 
+3. Phạm Anh Tú - Module 3: Giao dịch (Transaction)
+   - Thực hiện giao dịch
+   - Xác thực giao dịch
+   - Quản lý lịch sử giao dịch
+   - Báo cáo giao dịch
+
+4. Đoàn Thị Nhàn - Module 4: Tiện ích và Bảo mật OTP
+   - Tạo và xác thực OTP
+   - Backup và phục hồi dữ liệu
+   - Các tiện ích hệ thống
+   - Bảo mật và mã hóa
 
 ## Quy trình làm việc nhóm và quản lí dự án với Git
 
@@ -67,10 +89,6 @@
 
 1. Mở PowerShell hoặc Command Prompt
 2. Di chuyển đến thư mục chứa mã nguồn
-3. Chạy file build.bat:
-   ```
-   .\build.bat
-   ```
 
 ## Tính năng chính
 
@@ -82,6 +100,7 @@
 2. Đăng nhập
    - Xác thực người dùng bằng tên đăng nhập và mật khẩu
    - Mật khẩu được mã hóa bằng SHA-256
+   - Phân quyền admin có quyền xem data trên giao diện menu và thay đổi thông tin của người dùng
 
 3. Quản lý ví điểm
    - Xem số dư ví
@@ -114,10 +133,28 @@
   - `wallets.dat`: Dữ liệu ví điểm
   - `transactions.dat`: Dữ liệu giao dịch
   - `backup/`: Thư mục chứa bản sao lưu
+  - `admin`: Lưu trữ ví của admin
+
+## Quản lý Backup và Phục hồi dữ liệu
+
+1. Backup manual
+   - Backup được lưu trong thư mục `data/backup/` `
+   - Mỗi bản backup bao gồm:
+     - Dữ liệu người dùng (users.dat)
+     - Dữ liệu ví điểm (wallets.dat)
+     - Dữ liệu giao dịch (transactions.dat)
+   - Menu có option backup 
+
+2. Phục hồi dữ liệu manual
+   - Hệ thống cho phép phục hồi từ bất kỳ bản backup nào
+   - Quá trình phục hồi sẽ:
+     - Sao chép dữ liệu từ bản backup vào thư mục data
+     - Xác thực tính toàn vẹn của dữ liệu
+     - Tạo bản backup của dữ liệu hiện tại trước khi phục hồi
+   - Ở menu có option phục hồi 
 
 ## Lưu ý
 
 - Dữ liệu được lưu trong thư mục `data/`
 - Nên thực hiện backup dữ liệu thường xuyên
-- Mật khẩu được mã hóa nên không thể khôi phục nếu quên
-- OTP được tạo ngẫu nhiên và chỉ có hiệu lực trong một khoảng thời gian ngắn
+
