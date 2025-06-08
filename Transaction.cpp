@@ -1,46 +1,58 @@
 #include "Transaction.h"
 #include <sstream>
-#include <stdexcept>
+#include <vector>
 
-Transaction::Transaction(const std::string& id,
-                         const std::string& walletFrom,
-                         const std::string& walletTo,
-                         int points,
-                         const std::string& timestamp,
-                         const std::string& status)
-    : id(id), walletFrom(walletFrom), walletTo(walletTo),
-      points(points), timestamp(timestamp), status(status) {}
+// Ham khoi tao mac dinh cua Transaction
+Transaction::Transaction() : amount(0), timestamp(0), status("pending") {}
 
-const std::string& Transaction::getId() const { return id; }
-const std::string& Transaction::getWalletFrom() const { return walletFrom; }
-const std::string& Transaction::getWalletTo() const { return walletTo; }
-int Transaction::getPoints() const { return points; }
-const std::string& Transaction::getTimestamp() const { return timestamp; }
-const std::string& Transaction::getStatus() const { return status; }
+// Ham khoi tao co tham so day du
+Transaction::Transaction(
+    const std::string& transactionId,     // Ma giao dich
+    const std::string& fromWalletId,      // Vi nguon
+    const std::string& toWalletId,        // Vi dich
+    int amount,                           // So tien giao dich
+    time_t timestamp,                     // Thoi diem giao dich (UNIX timestamp)
+    const std::string& status             // Trang thai giao dich
+)
+    : transactionId(transactionId),
+      fromWalletId(fromWalletId),
+      toWalletId(toWalletId),
+      amount(amount),
+      timestamp(timestamp),
+      status(status) {}
 
+// Ham chuyen doi doi tuong Transaction thanh chuoi CSV de luu file
 std::string Transaction::serialize() const {
-    std::ostringstream oss;
-    oss << id << "," << walletFrom << "," << walletTo << ","
-        << points << "," << timestamp << "," << status;
-    return oss.str();
+    std::ostringstream oss; // Tao stream de ghi chuoi
+    oss << transactionId << ','           // Ma giao dich
+        << fromWalletId << ','            // Vi nguon
+        << toWalletId << ','              // Vi dich
+        << amount << ','                  // So tien
+        << timestamp << ','               // Thoi gian
+        << status;                        // Trang thai
+    return oss.str(); // Tra ve chuoi da ghep
 }
 
+// Ham chuyen chuoi CSV thanh doi tuong Transaction
 Transaction Transaction::deserialize(const std::string& data) {
-    std::istringstream iss(data);
-    std::string id, walletFrom, walletTo, timestamp, status;
-    int points;
+    std::istringstream iss(data); // Tao stream de doc chuoi
+    std::string token;            // Bien tam de luu tru truong
+    std::vector<std::string> tokens; // Luu tat ca cac truong tach duoc
 
-    if (!std::getline(iss, id, ',')) throw std::runtime_error("Invalid data");
-    if (!std::getline(iss, walletFrom, ',')) throw std::runtime_error("Invalid data");
-    if (!std::getline(iss, walletTo, ',')) throw std::runtime_error("Invalid data");
+    // Tach chuoi theo dau ',' va luu vao vector tokens
+    while (std::getline(iss, token, ',')) 
+        tokens.push_back(token);
 
-    std::string pointsStr;
-    if (!std::getline(iss, pointsStr, ',')) throw std::runtime_error("Invalid data");
-    points = std::stoi(pointsStr);
+    // Neu so truong < 6 thi tra ve doi tuong mac dinh
+    if (tokens.size() < 6) return Transaction();
 
-    if (!std::getline(iss, timestamp, ',')) throw std::runtime_error("Invalid data");
-    if (!std::getline(iss, status, ',')) throw std::runtime_error("Invalid data");
-
-    return Transaction(id, walletFrom, walletTo, points, timestamp, status);
+    // Tao doi tuong Transaction tu vector tokens
+    return Transaction(
+        tokens[0],                          // transactionId
+        tokens[1],                          // fromWalletId
+        tokens[2],                          // toWalletId
+        std::stoi(tokens[3]),               // amount (chuyen tu chuoi sang int)
+        std::stol(tokens[4]),               // timestamp (chuyen tu chuoi sang long)
+        tokens[5]                           // status
+    );
 }
-
