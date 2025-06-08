@@ -4,7 +4,7 @@
 
 ## Thành viên tham gia dự án và công việc được giao
 
-1. Dương Công Uy - Module 1: Quản lý Người dùng (User Management)
+1. Dương Trương Công Uy - Module 1: Quản lý Người dùng (User Management)
    - Đăng ký tài khoản
    - Đăng nhập
    - Quản lý thông tin người dùng
